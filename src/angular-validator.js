@@ -11,7 +11,10 @@ angular.module('angularValidator').directive('angularValidator',
 
                 // This is the the scope form model
                 // All validation states are contained here
-                var scopeForm = scope[DOMForm.name];
+                var form_name = DOMForm.attributes['name'].value;
+                var scopeForm = scope[form_name];
+
+
 
                 // Set the default submitted state to false
                 scopeForm.submitted = false;
