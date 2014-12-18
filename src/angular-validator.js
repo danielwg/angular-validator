@@ -14,8 +14,6 @@ angular.module('angularValidator').directive('angularValidator',
                 var form_name = DOMForm.attributes['name'].value;
                 var scopeForm = scope[form_name];
 
-
-
                 // Set the default submitted state to false
                 scopeForm.submitted = false;
 
@@ -61,7 +59,7 @@ angular.module('angularValidator').directive('angularValidator',
                     }
 
                     scope.$watch(function() {
-                            return elementToWatch.value + scopeForm.submitted + checkElementValididty(elementToWatch) + getDirtyValue(scopeForm[elementToWatch.name]);
+                            return elementToWatch.value + scopeForm.submitted + checkElementValididty(elementToWatch) + getDirtyValue(scopeForm[elementToWatch.name]) + getValidValue(scopeForm[elementToWatch.name]);
                         },
                         function() {
                             // if dirty show
@@ -87,6 +85,14 @@ angular.module('angularValidator').directive('angularValidator',
                     }
                 }
 
+                // Returns the $valid value of the element if it exists
+                function getValidValue(element) {
+                    if (element) {
+                        if ("$valid" in element) {
+                            return element.$valid;
+                        }
+                    }
+                }
 
 
                 function checkElementValididty(element) {
